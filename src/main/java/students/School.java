@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+interface StudentCriterion {
+  boolean test(Student s);
+}
+
 public class School {
   public static Comparator<Student> inverse(Comparator<Student> cs) {
     return (s1, s2) -> cs.compare(s2, s1);
