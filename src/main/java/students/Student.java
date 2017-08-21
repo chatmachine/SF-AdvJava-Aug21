@@ -2,6 +2,7 @@ package students;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,4 +44,44 @@ public final class Student {
   public String toString() {
     return "Student{" + "name=" + name + ", gpa=" + gpa + ", courses=" + courses + '}';
   }
+
+  private static Comparator<Student> nameComparator =
+//      new Comparator<Student>() {
+
+//    @Override
+    /*public int compare*/
+      (Student o1, Student o2) -> {
+      System.out.println("??? comparator...");
+      return o1.getName().compareTo(o2.getName());
+    }
+  /*}*/;
+//  private static Comparator<Student> nameComparator =
+////  private static class NameComparator implements 
+//      new Comparator<Student>() {
+//
+//    @Override
+//    public int compare(Student o1, Student o2) {
+//      System.out.println("anonymous comparator...");
+//      return o1.getName().compareTo(o2.getName());
+//    }
+//  };
+      
+  public static Comparator<Student> getNameComparator() {
+    return nameComparator;
+  }
+  
+//  private static Comparator<Student> nameComparator = new NameComparator();
+//  public static Comparator<Student> getNameComparator() {
+//    return nameComparator;
+//  }
+//  
+//  private static class NameComparator implements Comparator<Student> {
+//
+//    @Override
+//    public int compare(Student o1, Student o2) {
+//      System.out.println("Inner comparator...");
+//      return o1.getName().compareTo(o2.getName());
+//    }
+//
+//  }
 }
