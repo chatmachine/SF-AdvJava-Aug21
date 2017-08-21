@@ -46,15 +46,23 @@ public final class Student {
   }
 
   private static Comparator<Student> nameComparator =
-//      new Comparator<Student>() {
+    (o1, o2)->o1.name.compareTo(o2.name);
 
-//    @Override
-    /*public int compare*/
-      (Student o1, Student o2) -> {
-      System.out.println("??? comparator...");
-      return o1.getName().compareTo(o2.getName());
-    }
-  /*}*/;
+//  private static Comparator<Student> nameComparator
+//      = (Student o1, Student o2) -> {
+//        return o1.getName().compareTo(o2.getName());
+//      };
+
+//  private static Comparator<Student> nameComparator =
+////      new Comparator<Student>() {
+//
+////    @Override
+//    /*public int compare*/
+//      (Student o1, Student o2) -> {
+//      System.out.println("lambda comparator...");
+//      return o1.getName().compareTo(o2.getName());
+//    }
+//  /*}*/;
 //  private static Comparator<Student> nameComparator =
 ////  private static class NameComparator implements 
 //      new Comparator<Student>() {
