@@ -37,9 +37,8 @@ public class School {
     System.out.println("Smart: -----------------------");
     Criterion<Student> smart = s -> s.getGpa() > 3;
     List<Student> selected = filter(school, smart);
-    for (Student s : selected) {
-      System.out.println("> " + s);
-    }
+    selected.forEach(s->System.out.println(s));
+    
     System.out.println("Enthusiastic: -----------------------");
     Criterion<Student> enthusiastic = s -> s.getCourses().size() > 2;
     selected = filter(school, enthusiastic);
