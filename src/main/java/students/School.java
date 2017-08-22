@@ -1,11 +1,16 @@
 package students;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
 interface StudentCriterion {
   boolean test(Student s);
+}
+
+interface Criterion<E> {
+  boolean test(E s);
 }
 
 public class School {
@@ -18,6 +23,18 @@ public class School {
     List<Student> rv = new ArrayList<>();
     
     for (Student s : in) {
+      if (criterion.test(s)) {
+        rv.add(s);
+      }
+    }
+    return rv;
+  }
+  
+  public static <E> List<E> filter(
+      Iterable<E> in, Criterion<E> criterion) {
+    List<E> rv = new ArrayList<>();
+    
+    for (E s : in) {
       if (criterion.test(s)) {
         rv.add(s);
       }
@@ -68,5 +85,24 @@ public class School {
     for (Student s : selected) {
       System.out.println("> " + s);
     }
+    System.out.println("Smart: -----------------------");
+    selected = filter(school, s->s.getGpa() > 3);
+    for (Student s : selected) {
+      System.out.println("> " + s);
+    }
+    System.out.println("Enthusiastic: -----------------------");
+    selected = filter(school, s->s.getCourses().size() > 2);
+    for (Student s : selected) {
+      System.out.println("> " + s);
+    }
+    
+    System.out.println("Long strings: -----------------------");
+    List<String> ls = Arrays.asList("Fred", "Jim", "Orinoco", "Wafflesprocket");
+    List<String> longS = filter(ls, s->s.length() > 4);
+    for (String s : longS) {
+      System.out.println("> " + s);
+    }
+    
+    
   }
 }
