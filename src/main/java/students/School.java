@@ -13,12 +13,12 @@ public class School {
     return (s1, s2) -> cs.compare(s2, s1);
   }
   
-  public static List<Student> getSmartStudents(
-      Iterable<Student> in) {
+  public static List<Student> getStudents(
+      Iterable<Student> in, StudentCriterion criterion) {
     List<Student> rv = new ArrayList<>();
     
     for (Student s : in) {
-      if (s.getGpa() > 3.4) {
+      if (criterion.test(s)) {
         rv.add(s);
       }
     }
@@ -58,6 +58,15 @@ public class School {
     for (Student s : school) {
       System.out.println("> " + s);
     }
-   
+    System.out.println("Smart: -----------------------");
+    List<Student> selected = getStudents(school, s->s.getGpa() > 3);
+    for (Student s : selected) {
+      System.out.println("> " + s);
+    }
+    System.out.println("Enthusiastic: -----------------------");
+    selected = getStudents(school, s->s.getCourses().size() > 2);
+    for (Student s : selected) {
+      System.out.println("> " + s);
+    }
   }
 }
