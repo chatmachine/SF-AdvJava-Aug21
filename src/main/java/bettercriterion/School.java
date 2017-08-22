@@ -1,37 +1,10 @@
-package students;
+package bettercriterion;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class SchoolV2 {
-
-  public static <E> Criterion<E> and(Criterion<E>... c) {
-    System.out.println("In and function...");
-    return s -> {
-      for (Criterion<E> t : c) {
-        if (!(t.test(s))) return false;
-      }
-      return true;
-    };
-  } 
-
-//  public static <E> Criterion<E> and(Criterion<E> a, Criterion<E> b) {
-//    System.out.println("In and function...");
-//    return s -> a.test(s) && b.test(s);
-//  }
-  
-//  public static <E> Criterion<E> and(Criterion<E> a, Criterion<E> b) {
-//    System.out.println("In and function...");
-//    return new Criterion<E>() {
-//      @Override
-//      public boolean test(E s) {
-//        System.out.println("In created function...");
-//        return a.test(s) && b.test(s);
-//      }
-//    };
-//  }
-
+public class School {
+ 
   public static <E> List<E> filter(
       Iterable<E> in, Criterion<E> criterion) {
     List<E> rv = new ArrayList<>();
@@ -75,7 +48,7 @@ public class SchoolV2 {
     }
 
     System.out.println("Smart and Enthusiastic: -----------------------");
-    selected = filter(school, and(smart, enthusiastic));
+    selected = filter(school, smart.and(enthusiastic));
     for (Student s : selected) {
       System.out.println("> " + s);
     }
