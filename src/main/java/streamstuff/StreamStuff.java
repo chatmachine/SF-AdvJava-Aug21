@@ -37,6 +37,11 @@ class Automobile {
 
 public class StreamStuff {
 
+  public static Stream<String> pairCarNameWithPassengers(Automobile x) {
+    String carName = x.getName();
+    return x.getPassengers().stream().map(p -> carName + " : " + p);
+  }
+
   public static void main(String[] args) {
     List<Automobile> fleet = Arrays.asList(
         new Automobile(8, "Edsel", "Tom", "Dick", "Harry"),
@@ -44,21 +49,20 @@ public class StreamStuff {
         new Automobile(14, "Taurus", "Sue", "Alan")
     );
 
-    Function<Automobile, Automobile> upperCaseCarName = 
-        x -> new Automobile(x.getFuelLevel(),
-        x.getName().toUpperCase(),
-        x.getPassengers().toArray(new String[0]));
-    
-    Function<Automobile, Stream<String>> pairCarNameWithPassengers = 
-        x -> {
-          String carName = x.getName();
-          return x.getPassengers().stream().map(p-> carName + " : " + p);
-        };
-    
+    Function<Automobile, Automobile> upperCaseCarName
+        = x -> new Automobile(x.getFuelLevel(),
+            x.getName().toUpperCase(),
+            x.getPassengers().toArray(new String[0]));
+
+//    Function<Automobile, Stream<String>> pairCarNameWithPassengers = 
+//        x -> {
+//          String carName = x.getName();
+//          return x.getPassengers().stream().map(p-> carName + " : " + p);
+//        };
     fleet.stream()
         .filter(x -> x.getFuelLevel() > 10)
         .map(upperCaseCarName)
-        .flatMap(pairCarNameWithPassengers)
-        .forEach(x -> System.out.println(x));
+        .flatMap(StreamStuff::pairCarNameWithPassengers)
+        .forEach(System.out::println);
   }
 }
